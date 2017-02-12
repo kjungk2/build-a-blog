@@ -4,13 +4,11 @@
     <title>Build-A-Blog</title>
 </head>
 <body>
-    <p>Enter a post here</p>
-    <form method="post" action="/">
-        <input type="text" name="new_post">
-        <br>
-        <input type="submit" value="Post it!">
-    </form>
+    <h1>Build-A-Blog</h1>
 
-    <p>Here are old posts:</p>
+    {% block content %}
+    {% endblock %}
+
 </body>
+
 </html>

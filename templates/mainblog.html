@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/newpost">
+    <input type="submit" value="New Blog Entry">
+</form>
+
+{% for blogpost in blogposts %}
+        <div>
+            <b><span style="color:blue;font-size:36px;font-weight:bold">
+            {{ blogpost.title }}
+        </span></b>
+            {{ blogpost.post_preview }}
+        </div>
+{% endfor %}
+
+{% endblock %}
