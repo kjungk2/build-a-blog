@@ -60,8 +60,16 @@ class NewPostHandler(Handler):
         elif new_title and new_body:
             b = BlogPost(title = new_title, post = new_body, post_preview = new_body[:30] + "...")
             b.put()
-            self.redirect("/blog")
+            id_int = b.key().id()
+            self.redirect("/blog/" + str(id_int))
 
+class ViewPostHandler(Handler):
+    def get(self, id):
+        blogpost = BlogPost.get_by_id(int(id))
+        self.render("singlepost.html", blogpost=blogpost)
+        
+        #content = blogpost.post
+        #self.response.write(content)
 
 class AutoRedirect(webapp2.RequestHandler):
     def get(self):
@@ -70,5 +78,6 @@ class AutoRedirect(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', AutoRedirect),
     ('/blog', MainHandler),
-    ('/newpost', NewPostHandler)
+    ('/newpost', NewPostHandler),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
 ], debug=True)

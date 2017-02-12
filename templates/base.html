@@ -3,8 +3,48 @@
 <head>
     <title>Build-A-Blog</title>
 </head>
+
+<style type="text/css">
+    body {
+        font-family: sans-serif;
+        width: 800px;
+        margin-left: 100px;
+        padding: 10px;
+    }
+
+    .error {
+        color: red;
+        font-weight: bold;
+    }
+
+    textarea {
+        width: 400px;
+        height: 200px;
+        font-family: arial;
+    }
+
+    .blogpost-title {
+        color:blue;
+        font-size:30px;
+        font-weight:bold;
+        margin-top: 40px;
+    }
+
+    .post_preview {
+        margin-left: 25px;
+        color: #D3D3D3;
+    }
+
+    .blogpost-post {
+        margin-left: 25px;
+        margin-top: 25px;
+    }
+
+
+</style>
+
 <body>
-    <h1>Build-A-Blog</h1>
+    <h1><a href="/blog">Build-A-Blog</a></h1>
 
     {% block content %}
     {% endblock %}

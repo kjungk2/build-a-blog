@@ -8,16 +8,19 @@
         <input type="text" name="title" value={{ title }}>
     </label>
 
+    <br>
+    <br>
+
     <label>
         <div>Body</div>
-        <textarea rows="10" cols="50" name="body">{{ body }}</textarea>
+        <textarea name="body">{{ body }}</textarea>
     </label>
 
     <br>
     <button>Post It!!!</button>
     <br>
 
-    <b><span style="color:red">{{ error }}</span></b>
+    <span class="error">{{ error }}</span>
 </form>
 
 {% endblock %}
