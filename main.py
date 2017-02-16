@@ -28,18 +28,12 @@ class BlogPost(db.Model):
 
 
 class MainHandler(Handler):
-    def render_main(self, blogposts):
-        self.render("mainblog.html", blogposts=blogposts)
-
     def get(self):
         blogposts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created DESC LIMIT 5")
-        self.render_main(blogposts)
+        self.render("mainblog.html", blogposts=blogposts)
 
 
 class NewPostHandler(Handler):
-    def render_newpost(self, title="", body="", error=""):
-        self.render("newpost.html", title=title, body=body, error=error)
-
     def get(self):
         t = jinja_env.get_template("newpost.html")
         content = t.render()
@@ -51,11 +45,11 @@ class NewPostHandler(Handler):
 
         if not new_title:
             error = "Provide a Title"
-            self.render_newpost(new_title, new_body, error)
+            self.render("newpost.html", title=new_title, body=new_body, error=error)
 
         elif not new_body:
             error = "Provide some content"
-            self.render_newpost(new_title, new_body, error)
+            self.render("newpost.html", title=new_title, body=new_body, error=error)
 
         elif new_title and new_body:
             b = BlogPost(title = new_title, post = new_body, post_preview = new_body[:30] + "...")
@@ -63,13 +57,12 @@ class NewPostHandler(Handler):
             id_int = b.key().id()
             self.redirect("/blog/" + str(id_int))
 
+
 class ViewPostHandler(Handler):
     def get(self, id):
         blogpost = BlogPost.get_by_id(int(id))
         self.render("singlepost.html", blogpost=blogpost)
-        
-        #content = blogpost.post
-        #self.response.write(content)
+
 
 class AutoRedirect(webapp2.RequestHandler):
     def get(self):
